@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-path = "/Resources/Test_images/3.jpeg"
+path = "..\character-segmentation\Test_images\\1.jpeg"
 
 def preprocess(img):
     imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
