@@ -9,4 +9,6 @@ sample output:\
 
 The code provided collects all the sample images and stitches them together for result.
 
-A minimum satuaration of 128 set first, then contours are made to detect the circular region and everything except that region is masked out. Then Kmeans segmentation algorithm is run over this region, which is basically assigning same colors to region that are close enough and have same pixel value. Assuming that the background circle has more area than the inside character, then number of pixel of each color is counted and everything except the least appearing values are masked out. Which is our output image extracted from the circular region.
+A minimum satuaration of 128 set first, then contours are made to detect the circular region and everything except that region is masked out. \
+Then Kmeans segmentation algorithm is run over this region, which is basically assigning same colors to region that are close enough and have same pixel value. \
+Assuming that the background circle has more area than the inside character, then number of pixel of each color is counted and everything except the least appearing values are masked out. Which is our output image extracted from the circular region.
