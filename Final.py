@@ -42,8 +42,7 @@ def white(img):
     for i in range(mat.shape[0]):
         for j in range(mat.shape[1]):
             if mat[i][j]!=0:
-                mat[i][j]==255
-        cv2.imshow("yo",mat)
+                mat[i][j]=255
     return mat
 def preprocess(img):
     imgt = img.copy()
@@ -56,8 +55,7 @@ def preprocess(img):
     imgt = kmeans_segmentation(imgt, 4)
     imgt = find_least_frequent_pixels(imgt)
     imgt = white(imgt)
-    # imgt = convert_non_black_to_white(imgt)
-    # imgt = cv2.resize(imgt, (200,200))
+    imgt = cv2.bitwise_and(img,img,mask=imgt)
     return imgt
 ##########################################################
 paths = ["..\character-segmentation\Test_images\{}.jpeg".format(i) for i in range(1, 8)]
@@ -65,6 +63,7 @@ pic = [None] * 8
 for i in range(1, 8):
     pic[i] = cv2.imread(paths[i-1])
     pic[i] = preprocess(pic[i])
+    cv2.imwrite(f"..\character-segmentation\segmented_test_images\\result{i}.png", pic[i])
 
 blank = np.zeros_like(pic[7])
 stackedH1 = np.hstack((pic[1], pic[2], pic[3]))
@@ -73,5 +72,5 @@ stackedH3 = np.hstack((pic[7], blank, blank))
 result = np.vstack((stackedH1, stackedH2, stackedH3))
 
 cv2.imshow("Result", result)
-cv2.imwrite("result_otsu.png", result)
+cv2.imwrite("result.png", result)
 cv2.waitKey(0)
